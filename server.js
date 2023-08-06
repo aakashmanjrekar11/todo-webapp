@@ -1,18 +1,42 @@
-const express = require("express");
-const app = express();
-const port = 3000;
+//! 1. Creating backend server
 
-// Example route handling
+const express = require("express"); // express framework
+const cors = require("cors"); // import Cross-Origin Resource Sharing
+const mongoose = require("mongoose"); // mongoose for MongoDB connection
+const dotenv = require("dotenv"); // import dotenv for environment variables
+dotenv.config(); // initialize dotenv
+const app = express();
+
+// route handling
 app.get("/", (req, res) => {
 	res.send("Hello, world!");
 });
 
-// Example middleware
+// JSON parsing - middleware
 app.use(express.json());
 
-// Example CORS configuration
-app.use(cors());
+// CORS configuration - middleware
+app.use(cors()); // frontend to backend requests
 
+// MongoDB connection
+const port = 5000;
+
+//! 2. Connecting to MongoDB
+
+const connection_string = process.env.CONNECTION_STRING;
+mongoose
+	.connect(connection_string, {
+		useNewUrlParser: true,
+	})
+	.then(() => {
+		console.log("Connected to MongoDB");
+	})
+	.catch((err) => {
+		console.error("Error connecting to MongoDB:", err);
+	});
+
+// ------------------------------------------------------------
+// Server start and listen
 app.listen(port, () => {
-	console.log(`Example app listening on port ${port}`);
+	console.log(`Server is running on port ${port}`);
 });
