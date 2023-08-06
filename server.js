@@ -23,9 +23,9 @@ const port = 5000;
 
 //! 2. Connecting to MongoDB
 
-const connection_string = process.env.CONNECTION_STRING;
+const mongo_uri = process.env.MONGO_URI;
 mongoose
-	.connect(connection_string, {
+	.connect(mongo_uri, {
 		useNewUrlParser: true,
 	})
 	.then(() => {
