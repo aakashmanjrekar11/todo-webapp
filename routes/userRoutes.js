@@ -7,7 +7,7 @@ const User = require("../models/User"); // import User model from models/User.js
 const verifyToken = require("../verifyToken.js"); // import verifyToken middleware
 
 // Route for user registration
-router.post("/register", verifyToken, async (req, res) => {
+router.post("/register", async (req, res) => {
 	try {
 		// get name, email, password from request body
 		const { name, email, password } = req.body;
