@@ -22,9 +22,9 @@ app.use(cors()); // frontend to backend requests
 const port = 5000;
 
 //! 2. Connecting to MongoDB
-const mongo_uri = process.env.MONGO_URI; //* get MongoDB URI from .env file
+const mongodb_uri = process.env.MONGODB_URI; //* get MongoDB URI from .env file
 mongoose
-	.connect(mongo_uri, {
+	.connect(mongodb_uri, {
 		useNewUrlParser: true,
 	})
 	.then(() => {
