@@ -38,7 +38,7 @@ mongoose
 
 //! 4. User authentication APIs
 const userRoutes = require("./routes/userRoutes"); // import userRoutes from routes/userRoutes.js
-app.use("/api/user", verifyToken, userRoutes); // Use the userRoutes with a base URL of '/api/user'
+app.use("/api/user", userRoutes); // Use the userRoutes with a base URL of '/api/user'
 
 //! 5. ToDo list APIs
 const taskRoutes = require("./routes/taskRoutes"); // import taskRoutes from routes/taskRoutes.js
