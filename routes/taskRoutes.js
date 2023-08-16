@@ -68,16 +68,6 @@ router.put("/tasks/:id", verifyToken, async (req, res) => {
 			message: "Task updated successfully",
 			data: task,
 		});
-		// const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
-		// 	new: true,
-		// }); // find task by id and update it with request body
-		// if (!task) {
-		// 	return res.status(404).json({ error: "Task not found" });
-		// }
-		// res.status(200).json({
-		// 	message: "Task updated successfully",
-		// 	data: task,
-		// });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
@@ -86,10 +76,23 @@ router.put("/tasks/:id", verifyToken, async (req, res) => {
 //* Route for deleting a task by id
 router.delete("/tasks/:id", verifyToken, async (req, res) => {
 	try {
-		const task = await Task.findByIdAndDelete(req.params.id); // find task by id and delete it
+		const userId = req.user; // Get the user's ID from the authenticated request
+
+		const task = await Task.findById(req.params.id); // find task by id
+
 		if (!task) {
 			return res.status(404).json({ error: "Task not found" });
 		}
+
+		// Check if the task belongs to the authenticated user
+		if (task.userId.toString() !== userId) {
+			return res
+				.status(403)
+				.json({ error: "You do not have permission to delete this task" });
+		}
+
+		await task.deleteOne(); // delete task from database
+
 		res.status(200).json({ message: "Task deleted successfully" });
 	} catch (error) {
 		res.status(500).json({ error: error.message });
