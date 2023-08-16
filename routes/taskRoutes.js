@@ -1,14 +1,23 @@
 //! 5. ToDo list APIs
 const express = require("express");
 const router = express.Router();
+const verifyToken = require("../verifyToken"); // import verifyToken middleware
 const Task = require("../models/Task"); // import Task model from models/Task.js
-// const { findByIdAndUpdate } = require("./models/task");
-const verifyToken = require("../verifyToken.js"); // import verifyToken middleware
 
 // Route for creating a new task
 router.post("/tasks", verifyToken, async (req, res) => {
 	try {
-		const task = new Task(req.body); // create a new task with request body
+		const userId = req.user; // Get the user's ID from the authenticated request
+		const taskData = {
+			title: req.body.title,
+			description: req.body.description,
+			completed: req.body.completed,
+			userId: userId, // Associate the task with the user who created it
+		};
+
+		const task = new Task(taskData);
+
+		// const task = new Task(req.body); // create a new task with request body
 		await task.save(); // save the task to database
 		res.status(201).json({ message: "Task created successfully", task });
 	} catch (error) {
@@ -19,8 +28,10 @@ router.post("/tasks", verifyToken, async (req, res) => {
 // Route for fetching all tasks
 router.get("/tasks", verifyToken, async (req, res) => {
 	try {
-		const tasks = await Task.find(); // fetch all tasks from database
-		res.status(200).json({ message: "Tasks fetched successfully" }, tasks);
+		const userId = req.user; // Get the user's ID from the authenticated request
+		const tasks = await Task.find({ userId }); // Filter tasks based on the user's ID
+		// const tasks = await Task.find(); // fetch all tasks from database
+		res.status(200).json(tasks);
 	} catch (error) {
 		res.status(500).json({ error: error.message });
 	}
