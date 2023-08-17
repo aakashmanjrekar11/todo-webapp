@@ -7,11 +7,6 @@ dotenv.config(); // initialize dotenv
 const app = express();
 const verifyToken = require("./verifyToken.js"); // import verifyToken
 
-// route handling
-// app.get("/", (req, res) => {
-// 	res.send("Hello, world!");
-// });
-
 // JSON parsing - middleware
 app.use(express.json());
 
@@ -56,4 +51,9 @@ app.use("/api/task", verifyToken, taskRoutes); // Use the userRoutes with a base
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
 	console.log(`Server is running on port ${port}`);
+});
+
+// route handling
+app.get("/", (req, res) => {
+	res.json("Hello, world!");
 });
