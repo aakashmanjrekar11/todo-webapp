@@ -17,7 +17,7 @@ app.use(express.json());
 
 // Allow requests from your Heroku app's domain
 const allowedOrigins = [
-	"https://minimal-todo-webapp-ee395c1f434c.herokuapp.com",
+	"https://minimal-todo-webapp-ee395c1f434c.herokuapp.com/",
 	// Add any other origins that you want to allow
 ];
 
