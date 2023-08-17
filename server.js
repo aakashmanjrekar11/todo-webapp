@@ -8,15 +8,25 @@ const app = express();
 const verifyToken = require("./verifyToken"); // import verifyToken
 
 // route handling
-app.get("/", (req, res) => {
-	res.send("Hello, world!");
-});
+// app.get("/", (req, res) => {
+// 	res.send("Hello, world!");
+// });
 
 // JSON parsing - middleware
 app.use(express.json());
 
+// Allow requests from your Heroku app's domain
+const allowedOrigins = [
+	"https://minimal-todo-webapp-ee395c1f434c.herokuapp.com",
+	// Add any other origins that you want to allow
+];
+
 // CORS configuration - middleware
-app.use(cors()); // frontend to backend requests
+app.use(
+	cors({
+		origin: allowedOrigins,
+	})
+); // frontend to backend requests
 
 //! 2. Connecting to MongoDB
 const mongodb_uri = process.env.MONGODB_URI; //* get MongoDB URI from .env file
