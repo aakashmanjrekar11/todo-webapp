@@ -18,9 +18,6 @@ app.use(express.json());
 // CORS configuration - middleware
 app.use(cors()); // frontend to backend requests
 
-// MongoDB connection
-const port = 5000;
-
 //! 2. Connecting to MongoDB
 const mongodb_uri = process.env.MONGODB_URI; //* get MongoDB URI from .env file
 mongoose
@@ -46,6 +43,7 @@ app.use("/api/task", verifyToken, taskRoutes); // Use the userRoutes with a base
 
 //! ------------------------------------------------------------
 //? Server start and listen
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
 	console.log(`Server is running on port ${port}`);
 });
