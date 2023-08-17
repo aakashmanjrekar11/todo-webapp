@@ -44,11 +44,11 @@ mongoose
 //! 3. under models/user.js
 
 //! 4. User authentication APIs
-const userRoutes = require("./routes/userRoutes"); // import userRoutes from routes/userRoutes.js
+const userRoutes = require("./routes/userRoutes.js"); // import userRoutes from routes/userRoutes.js
 app.use("/api/user", userRoutes); // Use the userRoutes with a base URL of '/api/user'
 
 //! 5. ToDo list APIs
-const taskRoutes = require("./routes/taskRoutes"); // import taskRoutes from routes/taskRoutes.js
+const taskRoutes = require("./routes/taskRoutes.js"); // import taskRoutes from routes/taskRoutes.js
 app.use("/api/task", verifyToken, taskRoutes); // Use the userRoutes with a base URL of '/api/task'
 
 //! ------------------------------------------------------------
