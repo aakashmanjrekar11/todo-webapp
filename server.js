@@ -5,7 +5,7 @@ const mongoose = require("mongoose"); // mongoose for MongoDB connection
 const dotenv = require("dotenv"); // import dotenv for environment variables
 dotenv.config(); // initialize dotenv
 const app = express();
-const verifyToken = require("./verifyToken"); // import verifyToken
+const verifyToken = require("./verifyToken.js"); // import verifyToken
 
 // route handling
 // app.get("/", (req, res) => {

@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt"); // import bcrypt for password hashing
 const jwt = require("jsonwebtoken"); // import jsonwebtoken for user authentication
-const User = require("../models/User"); // import User model from models/User.js
+const User = require("../models/User.js"); // import User model from models/User.js
 const verifyToken = require("../verifyToken.js"); // import verifyToken middleware
 
 // Route for user registration

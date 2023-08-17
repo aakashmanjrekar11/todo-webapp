@@ -1,8 +1,8 @@
 //! 5. ToDo list APIs
 const express = require("express");
 const router = express.Router();
-const verifyToken = require("../verifyToken"); // import verifyToken middleware
-const Task = require("../models/Task"); // import Task model from models/Task.js
+const verifyToken = require("../verifyToken.js"); // import verifyToken middleware
+const Task = require("../models/Task.js"); // import Task model from models/Task.js
 
 //* Route for creating a new task
 router.post("/tasks", verifyToken, async (req, res) => {
